@@ -1,0 +1,90 @@
+version: '3.8'
+services:
+    php:
+        image: wordpress:5.7.2-php7.4-fpm
+        container_name: ${APP_NAME:?wordpress}-php
+        restart: on-failure
+        environment:
+            WORDPRESS_DB_HOST: mariadb
+            WORDPRESS_DB_NAME: ${DATABASE_NAME:?wordpress_db}
+            WORDPRESS_DB_USER: ${DATABASE_USER:?wordpress_user}
+            WORDPRESS_DB_PASSWORD: ${DATABASE_PASS:?password}
+        volumes:
+            - './app/public:/var/www/html'
+            - './system/conf/php/conf.d/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini'
+        depends_on:
+            - mariadb
+        networks:
+            - webserver-network
+            - database-network
+
+    nginx:
+        image: nginx:1.20-alpine
+        container_name: ${APP_NAME:?wordpress}-nginx
+        restart: on-failure
+        ports:
+            - 80:80
+            - 443:443
+        links:
+            - 'php'
+        volumes:
+            - './app/public:/var/www/html'
+            - './system/conf/nginx/default.conf:/etc/nginx/conf.d/default.conf:rw'
+            - './system/logs/nginx:/var/log/nginx:rw'
+        networks:
+            - webserver-network
+
+    mariadb:
+        image: mariadb:10.5
+        container_name: ${APP_NAME:?wordpress}-mariadb
+        restart: on-failure
+        environment:
+            MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:?1234}
+            MYSQL_DATABASE: ${DATABASE_NAME:?wordpress_db}
+            MYSQL_USER: ${DATABASE_USER:?wordpress_user}
+            MYSQL_PASSWORD: ${DATABASE_PASS:?password}
+        volumes:
+            - mariadb-data:/var/lib/mysql
+            - './system/conf/mysql:/etc/mysql/conf.d'
+            - './system/logs/mysql:/var/log/mysql'
+        networks:
+            - database-network
+
+    phpmyadmin:
+        image: phpmyadmin:latest
+        container_name: ${APP_NAME:?wordpress}-phpmyadmin
+        restart: unless-stopped
+        ports:
+            - 8000:80
+        environment:
+            - PMA_ARBITRARY=1
+            - PMA_HOST=mariadb
+        depends_on:
+            - mariadb
+        volumes:
+            - './system/conf/php/conf.d/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini'
+        networks:
+            - database-network
+
+    mailhog:
+        image: mailhog/mailhog:latest
+        container_name: ${APP_NAME:?wordpress}-mailhog
+        restart: unless-stopped
+        ports:
+            - 1025:1025
+            - 8025:8025
+        command: ["-storage=maildir", "-maildir-path=/maildir"]
+        volumes:
+            - './system/data/mailhog:/maildir'
+        networks:
+            - webserver-network
+
+volumes:
+    mariadb-data:
+        name: ${APP_NAME:?wordpress}-mariadb-data
+
+networks:
+    webserver-network:
+        driver: bridge
+    database-network:
+        driver: bridge
