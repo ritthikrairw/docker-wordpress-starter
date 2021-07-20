@@ -13,7 +13,8 @@ Service included
 
 ## Installation
 
-1. Config the `.env` file
+1. Copy the `.env.example` file to `.env`
+2. Config the `.env` file
 
 ```env
 # App Information
@@ -29,10 +30,10 @@ DATABASE_PASS=123456            # Set password for user
 WORDPRESS_DEBUG=0               # Enable/Disable debug mode
 ```
 
-2. After set the `.env` run command `docker compose up -d`
-3. Access the website by http://localhost
-4. Access phpmyadmin by http://localhost:8000/
-5. Access Mailhog by http://localhost:8025/
+3. After set the `.env` run command `docker compose up -d`
+4. Access the website by http://localhost
+5. Access phpmyadmin by http://localhost:8000/
+6. Access Mailhog by http://localhost:8025/
 
 
 ### Optional
