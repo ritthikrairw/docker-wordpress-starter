@@ -1,7 +1,7 @@
 version: '3.8'
 services:
     php:
-        image: wordpress:5.7.2-php7.4-fpm
+        image: wordpress:5.7.2-php7.4-fpm-alpine
         container_name: ${APP_NAME:?wordpress}-php
         restart: on-failure
         environment:
