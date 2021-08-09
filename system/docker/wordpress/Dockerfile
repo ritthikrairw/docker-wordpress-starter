@@ -77,7 +77,12 @@ RUN { \
 
 VOLUME /var/www/html
 
+COPY --chown=www-data:www-data wp-config-docker.php /usr/src/wordpress/
+
 COPY install.sh /usr/local/bin/docker-entrypoint.sh
 
-ENTRYPOINT ["docker-entrypoint.sh"]
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+
+ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
+
 CMD ["php-fpm"]

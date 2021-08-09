@@ -17,7 +17,6 @@ services:
       WS_GROUP: www-data        # &lt;-- webserver group
     volumes:
       - "./app/public:/var/www/html"
-      - "./system/conf/app/wp-config-docker.php:/var/www/html/wp-config.php"
       - "./system/conf/php/conf.d/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini"
     depends_on:
       - mariadb
