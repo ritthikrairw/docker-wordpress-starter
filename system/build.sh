@@ -23,3 +23,5 @@ tar -zcvf \
     ;
 unset FILE_NAME \
     ;
+
+mv deploy-build.tar.gz ${WORKSPACE}
