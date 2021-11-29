@@ -19,7 +19,7 @@ SHARED_PATH=$DIR_PATH/shared
 sudo mkdir $REVISION_PATH
 sudo cp $DIR_PATH/deploy/deploy-build.tar.gz $REVISION_PATH
 cd $REVISION_PATH
-tar -xzvf deploy-build.tar.gz
+sudo tar -xzvf deploy-build.tar.gz
 sudo rm deploy-build.tar.gz
 
 # Check exist files
