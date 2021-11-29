@@ -49,10 +49,12 @@ sudo ln -s $SHARED_PATH/wp-config.php $PUBLIC_PATH/wp-config.php
 USER=$__USER
 GROUP=$__GROUP
 
+sudo chown -R $USER:$GROUP $REVISION_PATH/
 sudo chown -R $USER:$GROUP $SHARED_PATH/
 sudo chown -R $USER:$GROUP $DIR_PATH/revisions/
 sudo chown -R $USER:$GROUP $PUBLIC_PATH/
 sudo chown -R $USER:$GROUP $PUBLIC_PATH
+sudo chmod 755 $REVISION_PATH/
 sudo chmod 755 $SHARED_PATH/
 sudo chmod 755 $DIR_PATH/revisions/
 sudo chmod 755 $PUBLIC_PATH/
