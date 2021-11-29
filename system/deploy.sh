@@ -56,6 +56,10 @@ sudo chown -R $USER:$GROUP $PUBLIC_PATH
 sudo chmod 755 $SHARED_PATH/
 sudo chmod 755 $DIR_PATH/revisions/
 sudo chmod 755 $PUBLIC_PATH/
+sudo chmod 444 $PUBLIC_PATH/.htaccess
+sudo chmod 444 $PUBLIC_PATH/nginx.conf
+sudo chmod 444 $PUBLIC_PATH/wp-config.php
+
 
 # Unset variables and remove files
 sudo rm -rf $DIR_PATH/deploy
