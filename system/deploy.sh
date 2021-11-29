@@ -12,16 +12,11 @@ REVISION_PATH=$DIR_PATH/revisions/$REVISION_NAME
 SHARED_PATH=$DIR_PATH/shared
 
 # Check exist DIR
-if [ ! -D "$SHARED_PATH" ]; then
-    sudo mkdir $SHARED_PATH
-fi
-
-if [ ! -D "$DIR_PATH/revisions" ]; then
-    sudo mkdir $DIR_PATH/revisions
-fi
+[ ! -d "$SHARED_PATH" ] && sudo mkdir $SHARED_PATH
+[ ! -d "$DIR_PATH/revisions" ] && sudo mkdir $DIR_PATH/revisions
 
 # Make revisions directory and remove files
-mkdir $REVISION_PATH
+sudo mkdir $REVISION_PATH
 sudo cp $DIR_PATH/deploy/deploy-build.tar.gz $REVISION_PATH
 cd $REVISION_PATH
 tar -xzvf deploy-build.tar.gz
