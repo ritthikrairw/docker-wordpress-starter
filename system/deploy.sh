@@ -3,11 +3,20 @@
 #--------------------------------------------------------------------------------------------
 
 # Set variables
-DIR_PATH=/home/cp841421
+DIR_PATH=${__DIR_PATH}
 PUBLIC_PATH=$DIR_PATH/public_html
 REVISION_NAME=$(date +"%Y%m%d%H%M%S")
 REVISION_PATH=$DIR_PATH/revisions/$REVISION_NAME
 SHARED_PATH=$DIR_PATH/shared
+
+# Check exist DIR
+if [ ! -D "$SHARED_PATH" ]; then
+    mkdir $SHARED_PATH
+fi
+
+if [ ! -D "$DIR_PATH/revisions" ]; then
+    mkdir $DIR_PATH/revisions
+fi
 
 # Make revisions directory and remove files
 mkdir $REVISION_PATH
