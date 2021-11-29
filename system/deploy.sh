@@ -49,24 +49,12 @@ sudo ln -s $SHARED_PATH/wp-config.php $PUBLIC_PATH/wp-config.php
 USER=$__USER
 GROUP=$__GROUP
 
-# Reset to safe defaults
-sudo find $PUBLIC_PATH -exec chown $USER:$GROUP {} \;
-sudo find $PUBLIC_PATH -type d -exec chmod 755 {} \;
-sudo find $PUBLIC_PATH -type f -exec chmod 644 {} \;
-
-# allow wordpress to manage wp-config.php (but prevent world access)
-sudo chgrp ${GROUP} $PUBLIC_PATH/wp-config.php
-sudo chmod 660 $PUBLIC_PATH/wp-config.php
-
-# allow wordpress to manage .htaccess
-sudo touch $PUBLIC_PATH/.htaccess
-sudo chgrp $GROUP $PUBLIC_PATH/.htaccess
-sudo chmod 664 $PUBLIC_PATH/.htaccess
-
-# allow wordpress to manage wp-content
-sudo find $PUBLIC_PATH/wp-content -exec chgrp $GROUP {} \;
-sudo find $PUBLIC_PATH/wp-content -type d -exec chmod 775 {} \;
-sudo find $PUBLIC_PATH/wp-content -type f -exec chmod 664 {} \;
+sudo chown -R $USER:$GROUP $SHARED_PATH/
+sudo chown -R $USER:$GROUP $DIR_PATH/revisions/
+sudo chown -R $USER:$GROUP $PUBLIC_PATH/
+sudo chmod 755 $SHARED_PATH/
+sudo chmod 755 $DIR_PATH/revisions/
+sudo chmod 755 $PUBLIC_PATH/
 
 # Unset variables and remove files
 sudo rm -rf $DIR_PATH/deploy
