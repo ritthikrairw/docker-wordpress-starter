@@ -13,16 +13,16 @@ SHARED_PATH=$DIR_PATH/shared
 
 # Check exist DIR
 if [ ! -D "$SHARED_PATH" ]; then
-    mkdir $SHARED_PATH
+    sudo mkdir $SHARED_PATH
 fi
 
 if [ ! -D "$DIR_PATH/revisions" ]; then
-    mkdir $DIR_PATH/revisions
+    sudo mkdir $DIR_PATH/revisions
 fi
 
 # Make revisions directory and remove files
 mkdir $REVISION_PATH
-cp $DIR_PATH/deploy/deploy-build.tar.gz $REVISION_PATH
+sudo cp $DIR_PATH/deploy/deploy-build.tar.gz $REVISION_PATH
 cd $REVISION_PATH
 tar -xzvf deploy-build.tar.gz
 sudo rm deploy-build.tar.gz
@@ -45,10 +45,10 @@ fi
 
 # Symlinks
 sudo rm -rf $PUBLIC_PATH
-ln -s $REVISION_PATH $PUBLIC_PATH
-ln -s $SHARED_PATH/uploads $PUBLIC_PATH/wp-content
-ln -s $SHARED_PATH/.htaccess $PUBLIC_PATH/.htaccess
-ln -s $SHARED_PATH/wp-config.php $PUBLIC_PATH/wp-config.php
+sudo ln -s $REVISION_PATH $PUBLIC_PATH
+sudo ln -s $SHARED_PATH/uploads $PUBLIC_PATH/wp-content
+sudo ln -s $SHARED_PATH/.htaccess $PUBLIC_PATH/.htaccess
+sudo ln -s $SHARED_PATH/wp-config.php $PUBLIC_PATH/wp-config.php
 
 # Set chown and chmod
 USER=$__USER
