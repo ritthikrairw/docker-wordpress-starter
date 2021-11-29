@@ -52,6 +52,7 @@ GROUP=$__GROUP
 sudo chown -R $USER:$GROUP $SHARED_PATH/
 sudo chown -R $USER:$GROUP $DIR_PATH/revisions/
 sudo chown -R $USER:$GROUP $PUBLIC_PATH/
+sudo chown -R $USER:$GROUP $PUBLIC_PATH
 sudo chmod 755 $SHARED_PATH/
 sudo chmod 755 $DIR_PATH/revisions/
 sudo chmod 755 $PUBLIC_PATH/
@@ -65,3 +66,6 @@ unset REVISION_PATH
 unset SHARED_PATH
 unset FILE
 unset DIR
+
+# Restart services
+sudo service nginx restart
