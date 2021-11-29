@@ -39,7 +39,7 @@ if [ -d "$DIR" ]; then
 fi
 
 # Symlinks
-sudo rm -rf $PUBLIC_PATH
+sudo rm $PUBLIC_PATH
 sudo ln -s $REVISION_PATH $PUBLIC_PATH
 sudo ln -s $SHARED_PATH/uploads $PUBLIC_PATH/wp-content
 sudo ln -s $SHARED_PATH/.htaccess $PUBLIC_PATH/.htaccess
@@ -72,4 +72,6 @@ unset FILE
 unset DIR
 
 # Restart services
+sudo service php7.4-fpm restart
+sudo service php8.0-fpm restart
 sudo service nginx restart
