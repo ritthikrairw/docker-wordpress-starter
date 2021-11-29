@@ -6,7 +6,9 @@
 #--------------------------------------------------------------------------------------------
 
 # Remove all *.gz files
-rm -rf *.gz
+
+rm -rf ${WORKSPACE}/*.gz
+rm -rf ${WORKSPACE}/system/*.gz
 
 echo ${WORKSPACE}
 
@@ -23,5 +25,3 @@ tar -zcvf \
     ;
 unset FILE_NAME \
     ;
-
-mv deploy-build.tar.gz ${WORKSPACE}
