@@ -2,14 +2,14 @@ system/logs
 system/data
 .env
 
-# Ignore WordPress
+# ignore WordPress
 app/public/wp-config.php
 app/public/wp-content/cache
 ## app/public/wp-content/themes/twenty*
 app/public/wp-content/uploads/wc-logs
-app/public/wp-content/uploads/wp-migrate-db
+app/public/wp-content/uploads/wp-migrate-db-
 
-# Ignore Plugins
+# ignore Plugins
 app/public/wp-content/ai1wm-backups
 app/public/wp-content/plugins/what-the-file
 app/public/wp-content/plugins/query-monitor
@@ -18,12 +18,40 @@ app/public/wp-content/plugins/all-in-one-wp-migration
 app/public/wp-content/languages/plugins/all-in-one-wp-migration*
 app/public/wp-content/mu-plugins/wp-migrate-db-pro-compatibility.php
 
-# Ignore Node
-node_modules
-
-# Ignore Backup
+# ignore Backup
 app/public/wp-content/backup*
 app/public/wp-content/uploads/backwpup-*
 
-# Etc.
+# etc.
 app/public/wp-content/uploads/rsssl
+
+# ignore node dependency directories
+node_modules/
+
+# ignore log files and databases
+*.log
+*.sql
+*.sqlite
+
+# ignore log files and databases
+*.log
+*.sql
+*.sqlite
+
+# ignore compiled files
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+# ignore packaged files
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
