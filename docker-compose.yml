@@ -75,19 +75,6 @@ services:
     networks:
       - database-network
 
-  mailhog:
-    image: mailhog/mailhog:latest
-    container_name: ${APP_NAME:?wordpress}-mailhog
-    restart: unless-stopped
-    ports:
-      - 1025:1025
-      - 8025:8025
-    command: ["-storage=maildir", "-maildir-path=/maildir"]
-    volumes:
-      - "./system/data/mailhog:/maildir"
-    networks:
-      - webserver-network
-
 volumes:
   mariadb-data:
     name: ${APP_NAME:?wordpress}-mariadb-data
