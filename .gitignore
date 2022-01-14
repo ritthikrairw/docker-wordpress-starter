@@ -1,6 +1,7 @@
 system/logs
 system/data
 .env
+app
 
 # ignore WordPress
 app/public/wp-config.php
