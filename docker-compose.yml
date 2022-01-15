@@ -13,8 +13,7 @@ services:
       WORDPRESS_DEBUG: ${WORDPRESS_DEBUG:?false}
     volumes:
       - "./app/public:/var/www/html"
-      - "./system/conf/php/custom.ini:/usr/local/etc/php/conf.d/custom.i\
-        ni:ro"
+      - "./system/conf/php/custom.ini:/usr/local/etc/php/conf.d/custom.ini:ro"
     depends_on:
       - mariadb
     networks:
@@ -68,8 +67,7 @@ services:
     depends_on:
       - mariadb
     volumes:
-      - "./system/conf/php/custom.ini:/usr/local/etc/php/conf.d/custom.i\
-        ni:ro"
+      - "./system/conf/php/custom.ini:/usr/local/etc/php/conf.d/custom.ini:ro"
     networks:
       - database-network
 
