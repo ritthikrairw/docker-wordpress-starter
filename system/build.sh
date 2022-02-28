@@ -1,23 +1,21 @@
 #!/bin/bash
 
-
 #--------------------------------------------------------------------------------------------
 # Jenkins build script
 #--------------------------------------------------------------------------------------------
 
 # Remove all *.gz files
 
-echo "start remove old package..."
+echo "Begin removing old packages..."
 
 rm -rf ${WORKSPACE}/*.gz
 rm -rf ${WORKSPACE}/system/*.gz
 
-echo "remove old package success."
+echo "Removing an old package successfully."
 
-echo "current workspace directory"
-echo ${WORKSPACE}
+echo "Current workspace directory: " ${WORKSPACE}
 
-echo "start build package"
+echo "Begin building the package"
 
 # Build Website Package
 FILE_NAME=deploy-build.tar.gz \

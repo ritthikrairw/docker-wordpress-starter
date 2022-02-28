@@ -19,24 +19,24 @@ if [ -f .config ]; then
 
     # Check exist DIR
 
-    echo "check shared directory"
+    echo "Check shared directory"
     [ ! -d "$SHARED_PATH" ] && sudo mkdir $SHARED_PATH
 
-    echo "check revisions directory"
+    echo "Check revisions directory"
     [ ! -d "$DIR_PATH/revisions" ] && sudo mkdir $DIR_PATH/revisions
 
     # Make revisions directory and remove files
-    echo "create $REVISION_PATH directory"
+    echo "Create $REVISION_PATH directory"
     sudo mkdir $REVISION_PATH
 
-    echo "copy deploy-build.tar.gz to $REVISION_PATH directory"
+    echo "Copy deploy-build.tar.gz to $REVISION_PATH directory"
     sudo cp $USER_DIR/deploy/deploy-build.tar.gz $REVISION_PATH
     cd $REVISION_PATH
 
-    echo "extract deploy-build.tar.gz"
+    echo "Extract deploy-build.tar.gz"
     sudo tar -xzf deploy-build.tar.gz
 
-    echo "remove deploy-build.tar.gz"
+    echo "Remove deploy-build.tar.gz"
     sudo rm deploy-build.tar.gz
 
     # Check exist files
