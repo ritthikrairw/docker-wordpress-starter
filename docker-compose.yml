@@ -65,7 +65,7 @@ services:
     depends_on:
       - mariadb
     volumes:
-      - "./system/conf/php/custom.ini:/usr/local/etc/php/conf.d/custom.ini:ro"
+      - "./system/conf/php/custom.ini:/usr/local/etc/php/conf.d/uploads.ini:rw,delegated"
     networks:
       - database-network
 
