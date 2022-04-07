@@ -3,6 +3,8 @@ system/data
 .env
 app
 
+shared/uploads/*
+
 # ignore WordPress
 app/public/wp-config.php
 app/public/wp-content/cache
