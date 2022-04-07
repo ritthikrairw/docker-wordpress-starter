@@ -7,7 +7,7 @@ server {
     listen 80;
     listen [::]:80;
 
-    server_name localhost;
+    server_name ${SERVER_NAME};
 
     root /var/www/html;
 
@@ -97,7 +97,7 @@ server {
         fastcgi_param SERVER_PORT $server_port;
         fastcgi_param SERVER_NAME $host;
 
-        fastcgi_param HTTPS $fastcgi_https;
+        fastcgi_param HTTPS off;
 
         fastcgi_param REDIRECT_STATUS 200;
 

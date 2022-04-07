@@ -24,6 +24,8 @@ services:
   nginx:
     image: nginx:1.20-alpine
     container_name: ${APP_NAME:?wordpress}-nginx
+    environment:
+      SERVER_NAME: ${SERVER_NAME:?localhost}
     restart: unless-stopped
     ports:
       - ${NGINX_HTTP_PORT}:80
@@ -32,9 +34,14 @@ services:
       - php
     volumes:
       - "./app/public:/var/www/html"
-      - "./shared/uploads:/var/www/html/web/app/uploads"
+      - "./shared/uploads:/var/www/html/wp-content/uploads"
       - "./system/conf/nginx/includes:/etc/nginx/includes"
-      - "./system/conf/nginx/site.conf:/etc/nginx/site.conf:ro"
+      - "./system/conf/nginx/templates/site.conf.template:/etc/nginx/templates/default.conf.template"
+
+      ## In case https with certs
+      # - "./system/conf/nginx/certs:/etc/nginx/certs"
+      # - "./system/conf/nginx/templates/site-https.conf.template:/etc/nginx/templates/default.conf.template"
+
       - "./system/conf/nginx/nginx.conf:/etc/nginx/nginx.conf:ro"
       - "./system/logs/nginx:/var/log/nginx:rw"
     networks:

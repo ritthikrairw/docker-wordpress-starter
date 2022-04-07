@@ -6,7 +6,7 @@ upstream php {
 server {
     listen 80;
     listen [::]:80;
-    server_name example.local www.example.local;
+    server_name ${SERVER_NAME};
     location / {
         rewrite ^ https://$host$request_uri? permanent;
     }
@@ -16,7 +16,7 @@ server {
     listen 443 ssl http2;
     listen [::]:443 ssl http2;
 
-    server_name example.local www.example.local;
+    server_name ${SERVER_NAME};
 
     root /var/www/html;
 
@@ -63,7 +63,7 @@ server {
     location ~* \.(?:jpg|jpeg|gif|png|ico|xml)$ {
         access_log off;
         log_not_found off;
-        expires 5m;
+        expires 365d;
         add_header Cache-Control "public";
     }
 
@@ -71,7 +71,7 @@ server {
         access_log off;
         log_not_found off;
 
-        expires 5m;
+        expires 365d;
         add_header Cache-Control "public";
 
         # allow CORS requests
@@ -109,7 +109,7 @@ server {
         fastcgi_param SERVER_PORT $server_port;
         fastcgi_param SERVER_NAME $host;
 
-        fastcgi_param HTTPS $fastcgi_https;
+        fastcgi_param HTTPS on;
 
         fastcgi_param REDIRECT_STATUS 200;
 

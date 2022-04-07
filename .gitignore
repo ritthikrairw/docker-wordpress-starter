@@ -1,7 +1,10 @@
-system/logs
-system/data
+### Docker and system
 .env
 app
+system/logs
+system/data
+system/conf/nginx/certs/*
+!system/conf/nginx/certs/.gitkeep
 
 shared/uploads/*
 
