@@ -13,6 +13,7 @@ services:
       WORDPRESS_DEBUG: ${WORDPRESS_DEBUG:?false}
     volumes:
       - "./app/public:/var/www/html"
+      - "./shared/uploads:/var/www/html/wp-content/uploads"
       - "./system/conf/php/custom.ini:/usr/local/etc/php/conf.d/custom.ini:ro"
     depends_on:
       - mariadb
@@ -31,10 +32,10 @@ services:
       - php
     volumes:
       - "./app/public:/var/www/html"
-      - "./system/conf/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro"
-      - "./system/conf/nginx/includes/gzip.conf:/etc/nginx/includes/gzip.conf:ro"
-      - "./system/conf/nginx/includes/mime-types.conf:/etc/nginx/includes/mime-types.conf:ro"
-      - "./system/conf/nginx/includes/restrictions.conf:/etc/nginx/includes/restrictions.conf:ro"
+      - "./shared/uploads:/var/www/html/web/app/uploads"
+      - "./system/conf/nginx/includes:/etc/nginx/includes"
+      - "./system/conf/nginx/site.conf:/etc/nginx/site.conf:ro"
+      - "./system/conf/nginx/nginx.conf:/etc/nginx/nginx.conf:ro"
       - "./system/logs/nginx:/var/log/nginx:rw"
     networks:
       - webserver-network
@@ -68,6 +69,15 @@ services:
       - "./system/conf/php/custom.ini:/usr/local/etc/php/conf.d/uploads.ini:rw,delegated"
     networks:
       - database-network
+
+  maildev:
+    image: maildev/maildev
+    command: bin/maildev --web 80 --smtp 25 --hide-extensions STARTTLS
+    ports:
+      - "8025:80"
+    restart: always
+    networks:
+      - webserver-network
 
 volumes:
   mariadb-data:
