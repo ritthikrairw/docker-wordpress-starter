@@ -48,6 +48,7 @@ node_modules/
 *.exe
 *.o
 *.so
+*.DS_Store
 
 # ignore packaged files
 *.7z
