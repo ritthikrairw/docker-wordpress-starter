@@ -3,10 +3,8 @@
 app
 system/logs
 system/data
-system/conf/nginx/certs/*
-!system/conf/nginx/certs/.gitkeep
-
 shared/uploads/*
+!shared/uploads/.gitkeep
 
 # ignore WordPress
 app/public/wp-config.php
