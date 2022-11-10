@@ -11,6 +11,8 @@ services:
       WORDPRESS_DB_NAME: ${DATABASE_NAME:?wordpress_db}
       WORDPRESS_TABLE_PREFIX: ${TABLE_PREFIX:?wp_}
       WORDPRESS_DEBUG: ${WORDPRESS_DEBUG:?false}
+      WORDPRESS_CONFIG_EXTRA: |
+        define('WP_REDIS_HOST', 'redis');
     volumes:
       - "${APP_ROOT}/app/public:/var/www/html"
       - "${APP_ROOT}/shared/uploads:/var/www/html/wp-content/uploads"
@@ -77,6 +79,14 @@ services:
       - "traefik.docker.network=proxy"
       - "traefik.http.routers.${APP_NAME}-phpmyadmin.rule=Host(`${PHPMYADMIN_HOST_NAME}`)"
       - "traefik.http.routers.${APP_NAME}-phpmyadmin.tls=true"
+    networks:
+      - proxy
+      - database-network
+
+  redis:
+    image: redis:7.0.4
+    container_name: ${APP_NAME:?wordpress}-redis
+    restart: unless-stopped
     networks:
       - proxy
       - database-network
